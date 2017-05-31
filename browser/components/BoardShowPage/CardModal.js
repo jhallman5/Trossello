@@ -12,6 +12,7 @@ import PopoverMenuButton from '../PopoverMenuButton'
 import CopyCard from './CopyCard'
 import './CardModal.sass'
 import $ from 'jquery'
+import LabelCard from './LabelCard'
 
 export default class CardModal extends Component {
   static propTypes = {
@@ -119,6 +120,11 @@ const Controls = ({card, closeModal, board, list}) => {
   return <div className="CardModal-controls">
     <div className="CardModal-controls-title">Add</div>
     <Button><Icon type="user" /> Members</Button>
+
+    <PopoverMenuButton className="CardModal-controls-label" type="default" popover={LabelCard}>
+      <Icon type="tag" /> Labels
+    </PopoverMenuButton>
+
     <div className="CardModal-controls-title">Actions</div>
     {toggleOnArchived}
     <PopoverMenuButton className="CardModal-controls-copy" type="default" popover={copyCard}>

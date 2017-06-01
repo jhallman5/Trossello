@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Icon from '../Icon'
 import $ from 'jquery'
 import Form from '../Form'
 import Button from '../Button'
@@ -25,6 +26,7 @@ export default class LabelCard extends Component {
     const newLabel = {
       board_id: this.state.boardId,
       description: this.refs.description.value
+
     }
     $.ajax({
       method: 'post',
@@ -44,7 +46,9 @@ export default class LabelCard extends Component {
 
   render(){
     const colorBoxes = colors.map(color =>
-      <ColorBox key={color} color={color} />
+      <ColorBox key={color} color={color}>
+          <Icon type="check" />
+      </ColorBox>
     )
 
     return <DialogBox className="CardModal-CopyCardDialog" heading='Edit Label' onClose={this.props.onClose}>

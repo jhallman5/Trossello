@@ -62,4 +62,7 @@ router.post('/:cardId/move', (request, response, next) => {
     .catch(next)
 })
 
+router.post('/:cardId/label', (request, response, next) => {
+  let { labelColor } = request.body
+})
 export default router

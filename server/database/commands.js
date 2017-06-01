@@ -123,6 +123,14 @@ const createList = (attributes) =>
       createRecord('lists', {...attributes, order: results[0].count})
     )
 
+const createLabel = (attributes) =>
+  knex
+  .table('labels')
+  .then(results =>
+    createRecord('labels', {...attributes})
+  )
+
+
 const updateList = (id, attributes) =>
   updateRecord('lists', id, attributes)
 
@@ -456,5 +464,6 @@ export default {
   searchQuery,
   removeUserFromBoard,
   lockDropdown,
-  unlockDropdown
+  unlockDropdown,
+  createLabel
 }

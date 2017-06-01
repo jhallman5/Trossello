@@ -16,9 +16,31 @@ export default class LabelCard extends Component {
       title: this.props.card.content,
       order: this.props.card.order,
     }
-
+    this.createLabelHandler = this.createLabelHandler.bind(this)
   }
 
+
+  createLabelHandler(event){
+    event.preventDefault()
+    const newLabel = {
+      board_id: this.state.boardId,
+      description: this.refs.description.value
+    }
+    $.ajax({
+      method: 'post',
+      url: `/api/boards/${this.state.boardId}/labels` ,
+      contentType: "application/json; charset=utf-8",
+      dataType: 'json',
+      data: JSON.stringify(newLabel)
+    })
+    .then(response => {
+      console.log( "=-=-=-> response", response )
+    })
+    .catch( (error) => {
+      console.log( "=-=-=-> error", error )
+        debugger
+    })
+  }
 
   render(){
     const colorBoxes = colors.map(color =>
@@ -26,12 +48,12 @@ export default class LabelCard extends Component {
     )
 
     return <DialogBox className="CardModal-CopyCardDialog" heading='Edit Label' onClose={this.props.onClose}>
-      <Form>
-        <textarea />
+      <Form onSubmit={this.createLabelHandler}>
+        <input type="text" ref='description'/>
         <div className='CardModal-LabelCard-container'>
           {colorBoxes}
         </div>
-        <Button type="primary" submit>Create Card</Button>
+        <Button type="primary" submit>Create Label</Button>
       </Form>
     </DialogBox>
   }

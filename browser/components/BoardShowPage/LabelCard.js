@@ -16,8 +16,10 @@ export default class LabelCard extends Component {
       listId: this.props.card.list_id,
       title: this.props.card.content,
       order: this.props.card.order,
+      color: null,
     }
     this.createLabelHandler = this.createLabelHandler.bind(this)
+    this.selectColor= this.selectColor.bind(this)
   }
 
 
@@ -25,8 +27,8 @@ export default class LabelCard extends Component {
     event.preventDefault()
     const newLabel = {
       board_id: this.state.boardId,
-      description: this.refs.description.value
-
+      description: this.refs.description.value,
+      color: this.state.color
     }
     $.ajax({
       method: 'post',
@@ -44,12 +46,21 @@ export default class LabelCard extends Component {
     })
   }
 
+  selectColor(color){
+    this.setState({color})
+  }
+
+
+
   render(){
-    const colorBoxes = colors.map(color =>
-      <ColorBox key={color} color={color}>
-          <Icon type="check" />
-      </ColorBox>
-    )
+    const colorBoxes = colors.map(color =>{
+      return <ColorBox
+        key={color}
+        color={color}
+        onClick={this.selectColor}
+        selected={color === this.state.color}
+      />
+    })
 
     return <DialogBox className="CardModal-CopyCardDialog" heading='Edit Label' onClose={this.props.onClose}>
       <Form onSubmit={this.createLabelHandler}>
@@ -63,6 +74,7 @@ export default class LabelCard extends Component {
   }
 }
 
+console.log( "(>'')>  2" )
 const colors = [
   "#0079bf",
   "#d8a359",
@@ -77,8 +89,11 @@ const colors = [
 
 const ColorBox = (props) => {
   const {color} = props
-  return <div
+  return <button
     style={{backgroundColor: color}}
     className="CardModal-LabelCard-box"
-    />
+    onClick={event => { event.preventDefault(); props.onClick(color) }}
+  >
+    {props.selected ? <Icon type="check" /> : null }
+  </button>
 }

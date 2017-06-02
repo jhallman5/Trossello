@@ -98,7 +98,6 @@ router.post('/:boardId/lists/:listId/cards', (request, response, next) => {
 router.post('/:boardId/labels', (request, response, next) => {
   console.log( "=-=-=-> request.body", request.body )
   const label = request.body
-  label.color = 'green'
   commands.createLabel(label)
     .then( label => {
       response.json(label)

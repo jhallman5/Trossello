@@ -73,7 +73,6 @@ export default class CreateLabelCard extends Component {
   }
 }
 
-console.log( "(>'')>  2" )
 const colors = [
   "#0079bf",
   "#d8a359",

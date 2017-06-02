@@ -20,6 +20,11 @@ const getBoardsByUserId = (userId) =>
     .whereIn('user_boards.user_id', userId)
     .where('archived', false)
 
+const getLabelsByBoardId = (board_id) =>
+  return knex.table('labels')
+    .select('*')
+    .where('board_id', board_id )
+
 const getBoardMoveTargetsForUserId = (userId) =>
   getBoardsByUserId(userId).then(boards =>
     knex.table('lists')
@@ -121,4 +126,5 @@ export default {
   getListById,
   getInviteByToken,
   getBoardMoveTargetsForUserId,
+  getLabelsByBoardId,
 }

@@ -4,6 +4,7 @@ import listsRoutes from './lists'
 import cardsRoutes from './cards'
 import inviteRoutes from './invites'
 import userRoutes from './users'
+import labelRoutes from './labels'
 
 const router = new express.Router()
 
@@ -18,6 +19,7 @@ router.use((request, response, next) => {
 router.use('/cards',  cardsRoutes)
 router.use('/boards', boardsRoutes)
 router.use('/lists',  listsRoutes)
+router.use('/labels', labelRoutes)
 router.use('/users', userRoutes)
 
 router.use((error, request, response, next) => {

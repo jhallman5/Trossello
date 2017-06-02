@@ -17,30 +17,27 @@ export default class LabelCard extends Component {
       title: this.props.card.content,
       order: this.props.card.order,
       color: null,
+      labels: null,
       createCard: false,
     }
-    this.createLabelHandler = this.createLabelHandler.bind(this)
     this.selectColor = this.selectColor.bind(this)
-    this.createCard = this.createCard.bind(this)
+    this.getCurrentLabels = this.getCurrentLabels.bind(this)
   }
 
 
-  createLabelHandler(event){
-    event.preventDefault()
-    const newLabel = {
-      board_id: this.state.boardId,
-      description: this.refs.description.value,
-      color: this.state.color
+  getCurrentLabels(){
+    const boardId = {
+      boardId: this.state.boardId
     }
     $.ajax({
-      method: 'post',
-      url: `/api/boards/${this.state.boardId}/labels` ,
+      method: 'get',
+      url: `/api/labels/${this.state.boardId}` ,
       contentType: "application/json; charset=utf-8",
       dataType: 'json',
-      data: JSON.stringify(newLabel)
+      data: JSON.stringify({boardId})
     })
     .then(response => {
-      console.log( "=-=-=-> response", response )
+      this.setState({labels: response})
     })
     .catch( (error) => {
       console.log( "=-=-=-> error", error )
@@ -52,16 +49,13 @@ export default class LabelCard extends Component {
     this.setState({color})
   }
 
-  createCard(){
-    this.setState({createCard: true})
-  }
-
 
   render(){
-    if(this.state.createCard){
-      return {CreateLabelCard}
+    this.getCurrentLabels()
+    const DBLabels = this.state.labels
+    if(DBLabels) {
+      console.log( "(>'')> 2 ", DBLabels )
     }
-
     const currentLabels = colors.map(color =>{
       return <ColorBox
         key={color}
@@ -84,7 +78,6 @@ export default class LabelCard extends Component {
   }
 }
 
-console.log( "(>'')>  2" )
 const colors = [
   "#0079bf",
   "#d8a359",

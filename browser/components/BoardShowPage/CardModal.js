@@ -111,6 +111,7 @@ export default class CardModal extends Component {
 
 const Controls = ({card, closeModal, board, list}) => {
   const copyCard = <CopyCard card={card} board={board} list={list}/>
+  const labelCard = <LabelCard card={card} board={board} list={list}/>
   const toggleOnArchived = card.archived ?
     <div>
       <UnArchiveCardButton card={card} />
@@ -121,7 +122,7 @@ const Controls = ({card, closeModal, board, list}) => {
     <div className="CardModal-controls-title">Add</div>
     <Button><Icon type="user" /> Members</Button>
 
-    <PopoverMenuButton className="CardModal-controls-label" type="default" popover={LabelCard}>
+    <PopoverMenuButton className="CardModal-controls-label" type="default" popover={labelCard}>
       <Icon type="tag" /> Labels
     </PopoverMenuButton>
 

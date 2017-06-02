@@ -13,6 +13,7 @@ import CopyCard from './CopyCard'
 import './CardModal.sass'
 import $ from 'jquery'
 import LabelCard from './LabelCard'
+import CreateLabelCard from './CreateLabelCard'
 
 export default class CardModal extends Component {
   static propTypes = {
@@ -112,6 +113,7 @@ export default class CardModal extends Component {
 const Controls = ({card, closeModal, board, list}) => {
   const copyCard = <CopyCard card={card} board={board} list={list}/>
   const labelCard = <LabelCard card={card} board={board} list={list}/>
+  const createLabelCard = <CreateLabelCard card={card} board={board} list={list}/>
   const toggleOnArchived = card.archived ?
     <div>
       <UnArchiveCardButton card={card} />
@@ -124,6 +126,10 @@ const Controls = ({card, closeModal, board, list}) => {
 
     <PopoverMenuButton className="CardModal-controls-label" type="default" popover={labelCard}>
       <Icon type="tag" /> Labels
+    </PopoverMenuButton>
+
+    <PopoverMenuButton className="CardModal-controls-label" type="default" popover={createLabelCard}>
+      <Icon type="tag" /> Create Labels
     </PopoverMenuButton>
 
     <div className="CardModal-controls-title">Actions</div>

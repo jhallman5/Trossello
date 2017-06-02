@@ -5,9 +5,9 @@ import Form from '../Form'
 import Button from '../Button'
 import DialogBox from '../DialogBox'
 import './CardModal.sass'
-import CreateLabelCard from './CreateLabelCard'
 
-export default class LabelCard extends Component {
+
+export default class CreateLabelCard extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -17,11 +17,9 @@ export default class LabelCard extends Component {
       title: this.props.card.content,
       order: this.props.card.order,
       color: null,
-      createCard: false,
     }
     this.createLabelHandler = this.createLabelHandler.bind(this)
-    this.selectColor = this.selectColor.bind(this)
-    this.createCard = this.createCard.bind(this)
+    this.selectColor= this.selectColor.bind(this)
   }
 
 
@@ -52,17 +50,9 @@ export default class LabelCard extends Component {
     this.setState({color})
   }
 
-  createCard(){
-    this.setState({createCard: true})
-  }
-
 
   render(){
-    if(this.state.createCard){
-      return {CreateLabelCard}
-    }
-
-    const currentLabels = colors.map(color =>{
+    const colorBoxes = colors.map(color =>{
       return <ColorBox
         key={color}
         color={color}
@@ -71,15 +61,14 @@ export default class LabelCard extends Component {
       />
     })
 
-    return <DialogBox className="CardModal-CopyCardDialog" heading='Label' onClose={this.props.onClose}>
-      <Form >
+    return <DialogBox className="CardModal-CopyCardDialog" heading='Edit Label' onClose={this.props.onClose}>
+      <Form onSubmit={this.createLabelHandler}>
         <input type="text" ref='description'/>
         <div className='CardModal-LabelCard-container'>
-          {currentLabels}
+          {colorBoxes}
         </div>
-        <Button type="primary" submit>Add Label</Button>
+        <Button type="primary" submit>Create Label</Button>
       </Form>
-      <Button>Create Label</Button>
     </DialogBox>
   }
 }

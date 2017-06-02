@@ -94,6 +94,17 @@ router.post('/:boardId/lists/:listId/cards', (request, response, next) => {
     .catch(next)
 })
 
+//CREATE LABEL
+router.post('/:boardId/labels', (request, response, next) => {
+  console.log( "=-=-=-> request.body", request.body )
+  const label = request.body
+  label.color = 'green'
+  commands.createLabel(label)
+    .then( label => {
+      response.json(label)
+    })
+})
+
 // EDIT CARD
 router.post('/:boardId/lists/:listId/cards/edit', (request, response, next) => {
   const card = request.body
@@ -116,7 +127,6 @@ router.post('/:boardId/leave', (request, response, next) => {
       response.json(null)
     })
     .catch(next)
-
 })
 
 // STAR BOARD

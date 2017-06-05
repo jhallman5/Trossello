@@ -51,19 +51,20 @@ export default class LabelCard extends Component {
 
 
   render(){
+    let currentLabels;
+
     this.getCurrentLabels()
     const DBLabels = this.state.labels
     if(DBLabels) {
-      console.log( "(>'')> 2 ", DBLabels )
+      currentLabels = DBLabels.map(label =>{
+        return <ColorBox
+          key={label.id}
+          color={label.color}
+          description={label.description}
+        />
+      })
     }
-    const currentLabels = colors.map(color =>{
-      return <ColorBox
-        key={color}
-        color={color}
-        onClick={this.selectColor}
-        selected={color === this.state.color}
-      />
-    })
+
 
     return <DialogBox className="CardModal-CopyCardDialog" heading='Label' onClose={this.props.onClose}>
       <Form >
@@ -91,12 +92,11 @@ const colors = [
 ]
 
 const ColorBox = (props) => {
-  const {color} = props
+  const {color, description } = props
   return <button
     style={{backgroundColor: color}}
     className="CardModal-LabelCard-box"
-    onClick={event => { event.preventDefault(); props.onClick(color) }}
   >
-    {props.selected ? <Icon type="check" /> : null }
+    { description }
   </button>
 }

@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import Form from './Form'
-import Layout from './Layout'
-import './InviteByEmailPopover.sass'
-import Link from './Link'
-import Icon from './Icon'
-import Button from './Button'
+import Form from '../../Form'
+import Layout from '../../Layout'
+import '../../InviteByEmailPopover.sass'
+import Link from '../../Link'
+import Icon from '../../Icon'
+import Button from '../../Button'
 import boardStore from '../stores/boardStore'
-import DialogBox from './DialogBox'
+import DialogBox from '../../DialogBox'
 import commands from '../commands'
 
-export default class InviteByEmailPopover extends Component {
+class MemberMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,7 +66,7 @@ export default class InviteByEmailPopover extends Component {
         Enter an email address to invite someone new to this board.
         </p>
 
-    return <DialogBox className="InviteByEmailPopover" onClose={this.props.onClose} heading="Add Members">
+    return <DialogBox className="MemberMenu" onClose={this.props.onClose} heading="Add Members">
       <Form onSubmit={this.onSubmit}>
         <input
           className='emailInput'
@@ -88,3 +88,5 @@ export default class InviteByEmailPopover extends Component {
     </DialogBox>
   }
 }
+
+export default MemberMenu

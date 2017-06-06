@@ -73,6 +73,9 @@ const createBoard = (board) =>
 const createEmailInvite = (boardId, email) =>
   post(`/api/invites/${boardId}`, {email})
 
+//const createMemberList = (boardId, email) =>
+    //post(`/api/invites/${boardId}`, {email})
+
 const duplicateList = (boardId, listId, name) =>
   post(`/api/boards/${boardId}/lists/${listId}/duplicate`, {name})
     .then(reloadBoardStore)

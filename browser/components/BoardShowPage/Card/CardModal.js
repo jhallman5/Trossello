@@ -19,6 +19,7 @@ import CopyCard from '../CopyCard'
 import Activity from '../../Activity'
 import commands from '../../../commands'
 import Badge from './Badge'
+import InviteByEmailPopover from '../../InviteByEmailPopover'
 
 export default class CardModal extends Component {
   static propTypes = {
@@ -162,6 +163,7 @@ const CardLabels =({card, board, labelPanel}) => {
 }
 
 const Controls = ({board, list, card, closeModal, labelPanel}) => {
+  const memberAdd = <InviteByEmailPopover card={card}/>
   const dueDate = <DueDatePopover card={card}/>
   const copyCard = <CopyCard card={card} board={board} list={list}/>
   const toggleOnArchived = card.archived ?
@@ -173,8 +175,10 @@ const Controls = ({board, list, card, closeModal, labelPanel}) => {
 
   return <div className="CardModal-Controls">
     <div className="CardModal-Controls-title">Add</div>
-    <Button><Icon type="user" /> Members</Button>
-    <PopoverMenuButton className="CardModal-Controls-label" type="default" popover={labelPanel}>
+    <PopoverMenuButton className="CardModal-Controls-members" type="default" popover={memberAdd}>
+      <Icon type="user" /> Members
+    </PopoverMenuButton>
+    <PopoverMenuButton className="CardModal-Controls-members" type="default" popover={labelPanel}>
       <Icon type="tag" /> Labels
     </PopoverMenuButton>
     <PopoverMenuButton className="CardModal-Controls-label" type="default" popover={dueDate}>

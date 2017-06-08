@@ -10,6 +10,13 @@ import DialogBox from './DialogBox'
 import commands from '../commands'
 
 export default class InviteByEmailPopover extends Component {
+  static propTypes = {
+    onClose: React.PropTypes.func,
+    onBack: React.PropTypes.func,
+    boardId: React.PropTypes.number,
+    cardId: React.PropTypes.number
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -52,6 +59,8 @@ export default class InviteByEmailPopover extends Component {
   }
 
   render() {
+    console.log( "=-=-=-> this.props", this.props )
+
     const closeLink = this.props.onClose ?
       <Link onClick={this.props.onClose}>
         <Icon type="times" />

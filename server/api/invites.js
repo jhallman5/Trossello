@@ -4,13 +4,11 @@ const router = new express.Router()
 
 
 router.post('/:boardId', (request, response, next) => {
-  
-  //make a new command to addToBoardByEmailAddress(boardId, emailAddress)
-  //which looks for an existing user with that email address if it finds one adds to the board otherwise sends an invite to the email address
   const email = request.body.email
   const { boardId } = request.params
   const { userId } = request.session
   const attributes = {boardId: boardId, email: email}
+  commands.addUserToBoardByEmail( boardId, email)
   commands.createInvite(userId, attributes)
     .then( result => {
       return response.json(result)

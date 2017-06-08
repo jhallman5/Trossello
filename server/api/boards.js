@@ -4,7 +4,6 @@ const router = new express.Router()
 
 // INDEX
 router.get('/', (request, response, next) => {
-  console.log( "(>'')>  2" )
   queries.getBoardsByUserId(request.session.userId).then(boards => {
     response.json(boards)
   }).catch(next)
@@ -29,7 +28,6 @@ router.post('/search', ( request, response, next ) => {
 
 // CREATE
 router.post('/', (request, response, next) => {
-  console.log( "(>'')>  4" )
   commands.createBoard(request.session.userId, request.body).then( board => {
     response.json(board)
   }).catch(next)

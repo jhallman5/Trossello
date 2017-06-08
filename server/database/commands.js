@@ -564,6 +564,14 @@ const addUserToBoard = (userId, boardId) => {
     })
 }
 
+const addUserToBoardByEmail  = (boardId, email) =>
+  knex.table('users').where('email', email).first('*')
+  .then(user => createRecord('user_boards', {
+      user_id: user.id,
+      board_id: boardId
+    })
+  )
+
 const starBoard = (id) =>
   knex
     .table('boards')
@@ -744,4 +752,5 @@ export default {
   addComment,
   updateComment,
   deleteComment,
+  addUserToBoardByEmail
 }

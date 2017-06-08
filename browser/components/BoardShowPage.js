@@ -391,7 +391,6 @@ class BoardShowPage extends React.Component {
       <RenameBoardDropdown
         board={this.props.board}
       />
-    console.log( "=-=-=-> " , this.props )
 
     let faviconColor = board.background_color
     const className = `BoardShowPage ${this.state.sideBarOpen ? 'BoardShowPage-sideBarOpen' : ''}`

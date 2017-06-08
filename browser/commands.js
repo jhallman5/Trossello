@@ -71,7 +71,6 @@ const createBoard = (board) =>
     .then(reloadBoardsStore)
 
 const createEmailInvite = (boardId, email) =>{
-  console.log( "(>'')>  3" )
   return post(`/api/invites/${boardId}`, {email})
 }
 //const createMemberList = (boardId, email) =>

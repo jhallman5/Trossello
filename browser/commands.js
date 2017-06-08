@@ -70,9 +70,10 @@ const createBoard = (board) =>
   post('/api/boards', board)
     .then(reloadBoardsStore)
 
-const createEmailInvite = (boardId, email) =>
-  post(`/api/invites/${boardId}`, {email})
-
+const createEmailInvite = (boardId, email) =>{
+  console.log( "(>'')>  3" )
+  return post(`/api/invites/${boardId}`, {email})
+}
 //const createMemberList = (boardId, email) =>
     //post(`/api/invites/${boardId}`, {email})
 

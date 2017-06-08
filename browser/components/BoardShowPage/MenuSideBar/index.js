@@ -75,6 +75,7 @@ export default class MenuSideBar extends Component {
 
   render() {
     const { board } = this.props
+    console.log( "(>'')>  ", this.props )
     const paneName = this.state.panes[0] || 'Main'
     const panesMap = {
       "Main":               MainPane,

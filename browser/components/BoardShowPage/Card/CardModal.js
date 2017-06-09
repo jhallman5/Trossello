@@ -84,7 +84,7 @@ export default class CardModal extends Component {
             <CardHeader card={card} list={list}/>
             <div className="CardModal-body">
               <div className="CardModal-badges">
-                <MemberIcons card={card} />
+                <MemberIconArea users={this.props.users} />
               </div>
               <div className="CardModal-badges">
                 <CardLabels card={card} board={board} labelPanel={labelPanel}/>
@@ -138,18 +138,16 @@ const CardHeader = ({card, list}) => {
 
 }
 //TODO doesnt work yes, need to access db to gt avatar url
-const MemberIcons = (card) => {
-  const cardUsers = card.user_id
-  cardUsers.map(user => {
-    <img src={user} />
-  ]})
-    //having the card id, query the db (card_users) return users_id matching card_id
-    //map over users tables creating image divs displaying thier icon
+const MemberIconArea = (props) => {
+  const {users} = props
     const membersHeader = <div className="CardModal-CardBadges-header">Members</div>
+    const memberIcons = users.map(member => {
+      return <img src={member.avatar_url} key={member.id}/>
+    })
     return <div className="CardModal-CardBadges">
       {membersHeader}
       <div className="CardModal-CardBadges">
-        (>'')>
+        {memberIcons}
       </div>
     </div>
 }

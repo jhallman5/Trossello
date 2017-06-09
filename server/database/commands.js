@@ -572,6 +572,12 @@ const addUserToBoardByEmail  = (boardId, email) =>
     })
   )
 
+const deleteUserFromBoardByEmail = (boardId, email) =>
+  knex.table('users').where('email', email).first('*')
+    .then(user =>
+      knex.table('user_boards').where('user_id', user.id).del()
+      )
+
 const starBoard = (id) =>
   knex
     .table('boards')
@@ -752,5 +758,6 @@ export default {
   addComment,
   updateComment,
   deleteComment,
-  addUserToBoardByEmail
+  addUserToBoardByEmail,
+  deleteUserFromBoardByEmail
 }

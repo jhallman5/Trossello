@@ -73,6 +73,10 @@ const createBoard = (board) =>
 const createEmailInvite = (boardId, email) =>{
   return post(`/api/invites/${boardId}`, {email})
 }
+
+const deleteUserFromBoard = (boardId, email) =>{
+  return post(`/api/boards/${boardId}/user/delete/${email}`, {email})
+}
 //const createMemberList = (boardId, email) =>
     //post(`/api/invites/${boardId}`, {email})
 
@@ -233,4 +237,5 @@ export default {
   updateComment,
   deleteComment,
   editCardForm,
+  deleteUserFromBoard,
 }

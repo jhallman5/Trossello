@@ -213,4 +213,14 @@ router.get('/:boardId/labels/:labelId', (request, response, next) => {
     .catch(next)
 })
 
+//DELETE USER from board
+router.post('/:boardId/user/delete/:email', (request, response, next) => {
+  const { boardId, email } = request.params
+  commands.deleteUserFromBoardByEmail(boardId, email )
+    .then(() => {
+      response.json(null)
+    })
+    .catch(next)
+})
+
 export default router

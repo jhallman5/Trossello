@@ -10,6 +10,7 @@ import Card from '../Card'
 import List from '../List'
 import Unarchive from './Unarchive'
 import InviteByEmailPopover from '../../InviteByEmailPopover'
+import RemoveByEmailPopover from '../../RemoveByEmailPopover'
 
 // panes
 import { ActivityPanel, MainPaneActivity }  from './ActivityPanel'
@@ -152,6 +153,7 @@ const BoardMembersArea = (props) => {
       { boardMembers( board ) }
     </div>
     <InviteByEmailButton boardId={board.id}/>
+    <RemoveByEmailButton boardId={board.id}/>
     </div>
 }
 
@@ -363,6 +365,27 @@ class InviteByEmailButton extends ToggleComponent {
         Add Members...
       </Button>
       {inviteByEmail}
+    </span>
+  }
+}
+
+class RemoveByEmailButton extends ToggleComponent {
+
+  constructor(props){
+    super(props)
+  }
+
+  render(){
+    const removeByEmail = this.state.open ?
+      <RemoveByEmailPopover onClose={this.close} boardId={this.props.boardId} /> :
+      null
+
+    return <span ref="root">
+      <Button className="BoardShowPage-MenuSideBar-InviteByEmailButton" onClick={this.toggle}>
+        <Icon type='user-times' />
+        Delete Members...
+      </Button>
+      {removeByEmail}
     </span>
   }
 }

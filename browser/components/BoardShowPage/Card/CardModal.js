@@ -23,6 +23,7 @@ import InviteByEmailPopover from '../../InviteByEmailPopover'
 
 export default class CardModal extends Component {
   static propTypes = {
+    users: React.PropTypes.object.isRequired,
     card: React.PropTypes.object.isRequired,
     list: React.PropTypes.object.isRequired,
     board: React.PropTypes.object.isRequired,
@@ -83,6 +84,9 @@ export default class CardModal extends Component {
             <CardHeader card={card} list={list}/>
             <div className="CardModal-body">
               <div className="CardModal-badges">
+                <MemberIcons card={card} />
+              </div>
+              <div className="CardModal-badges">
                 <CardLabels card={card} board={board} labelPanel={labelPanel}/>
                 {dueDateBadge}
               </div>
@@ -132,6 +136,22 @@ const CardHeader = ({card, list}) => {
     </div>
   </div>
 
+}
+//TODO doesnt work yes, need to access db to gt avatar url
+const MemberIcons = (card) => {
+  const cardUsers = card.user_id
+  cardUsers.map(user => {
+    <img src={user} />
+  ]})
+    //having the card id, query the db (card_users) return users_id matching card_id
+    //map over users tables creating image divs displaying thier icon
+    const membersHeader = <div className="CardModal-CardBadges-header">Members</div>
+    return <div className="CardModal-CardBadges">
+      {membersHeader}
+      <div className="CardModal-CardBadges">
+        (>'')>
+      </div>
+    </div>
 }
 
 const CardLabels =({card, board, labelPanel}) => {

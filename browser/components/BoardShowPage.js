@@ -362,8 +362,10 @@ class BoardShowPage extends React.Component {
     let cardModal
     if (viewingCard) {
       let card = board.cards.find(card => card.id === viewingCard)
+      let users = board.users.filter(user => card.user_id.includes(user.id))
       let list = board.lists.find(list => list.id === card.list_id)
       cardModal = <CardModal
+        users={users}
         card={card}
         list={list}
         board={board}

@@ -87,6 +87,19 @@ const getSearchResult = (userId, searchTerm) => {
     .then(loadLabelIdsForCards)
 }
 
+const loadUserIdsForCards = cards =>
+  knex.table('card_users')
+    .select('*')
+    .whereIn('card_users.card_id', cards.map(card => card.id))
+    .then(cardUsers => {
+      cards.forEach(card => {
+        card.user_id = cardUsers
+          .filter(cardUser => cardUser.card_id === card.id)
+          .map(cardUser => cardUser.user_id)
+      })
+      return cards
+    })
+
 const loadLabelIdsForCards = cards =>
   knex.table('card_labels')
     .select('*')
@@ -127,6 +140,7 @@ const getListsAndCardsForBoard = (board) => {
         .whereIn('list_id', listIds)
         .orderBy('list_id', 'asc')
         .orderBy('order', 'asc')
+        .then(loadUserIdsForCards)
         .then(loadLabelIdsForCards)
         .then(getCommentsForCards)
         .then(cards => {
